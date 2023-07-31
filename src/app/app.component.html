@@ -1,1 +1,15 @@
-<div class="leaflet-map" leaflet [leafletOptions]="options"></div>
+<!-- <div
+  leaflet
+  class="leaflet-map"
+  [leafletOptions]="options"
+  [leafletLayers]="layers"
+  (leafletMapReady)="onMapReady($event)"
+></div> -->
+
+<div
+  leaflet
+  class="leaflet-map"
+  [leafletOptions]="options"
+  [leafletLayersControl]="layersControl"
+  (leafletMapReady)="onMapReady($event)"
+></div>
