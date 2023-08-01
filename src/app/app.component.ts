@@ -55,17 +55,29 @@ export class AppComponent {
     },
   };
 
+  markers = L.markerClusterGroup({
+    spiderfyOnMaxZoom: false,
+    showCoverageOnHover: false,
+    removeOutsideVisibleBounds: true,
+    zoomToBoundsOnClick: true,
+    maxClusterRadius: 70,
+    chunkedLoading: true,
+  });
+
   initMarkers() {
     dogArea.forEach((d) =>
-      L.marker([+d.position.lat, +d.position.lng], this.markerIcon)
-        .addTo(this.map)
-        .bindPopup(this.popupInfo(d.name, d.address))
+      this.markers.addLayer(
+        L.marker([+d.position.lat, +d.position.lng], this.markerIcon)
+          //.addTo(this.map)
+          .bindPopup(this.popupInfo(d.name, d.address))
+      )
     );
   }
 
   onMapReady(map: L.Map) {
     this.map = map;
     this.initMarkers();
+    map.addLayer(this.markers);
   }
 
   popupInfo(name: string, address: string): string {
